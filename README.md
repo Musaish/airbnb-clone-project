@@ -195,3 +195,35 @@ Messaging / Notifications — in-app messaging between host and guest; email/SMS
 Admin Dashboard — manage users, listings, bookings, reports, and handle disputes.
 
 Each feature should be built incrementally and covered by tests (unit + integration where appropriate).
+
+***5. API Security***
+
+Key measures to implement and why:
+
+Authentication — use secure tokens (JWT with refresh tokens or OAuth2). Protect endpoints to ensure only authenticated users can perform certain actions.
+
+Why: prevents unauthorized access to user data.
+
+Authorization / Role-based access control — enforce that only hosts can create properties and only owners can modify their listings.
+
+Why: prevents privilege escalation and data tampering.
+
+Input validation & sanitization — validate payloads, use serializers, and avoid direct string concatenation in queries.
+
+Why: prevents SQL injection and malformed data.
+
+Rate limiting & throttling — limit number of requests per IP or user to prevent abuse and brute-force attacks.
+
+Why: protects against DDoS and brute-force login attempts.
+
+TLS/HTTPS everywhere — encrypt traffic in transit.
+
+Secrets management — store API keys and secrets in environment variables or vaults; do not commit secrets to VCS.
+
+Secure payment handling — offload card handling to PCI-compliant providers (Stripe/Paystack). Never store raw card numbers.
+
+Logging & monitoring — record security-relevant events and set up alerting for suspicious activity.
+
+CORS & CSRF protections — configure CORS origin allowlists and enable CSRF protection where required.
+
+Dependency / vulnerability scanning — run tools (e.g., pip-audit, Dependabot) to detect vulnerable packages.
