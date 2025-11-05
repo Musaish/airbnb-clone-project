@@ -174,3 +174,24 @@ A User can make many Bookings (1-to-many) and leave many Reviews (1-to-many).
 A Booking has one Payment (1-to-1 or 1-to-many depending on refunds/partial payments).
 
 Considerations: add indexes on foreign keys, email, and common query fields (e.g., property.city, price range). Use transactions for booking & payment flows to avoid race conditions.
+
+
+***4. Feature Breakdown***
+
+User Management — sign up, login, password reset, profile management, role (guest/host). Essential for identity & authorization.
+
+Property Management — hosts create/update/list properties with photos, pricing, availability rules.
+
+Search & Filters — search by location, date availability, price range, number of guests, property type.
+
+Booking System — create bookings, availability checks, manage booking lifecycle (pending → confirmed → completed/cancelled).
+
+Payments — integrate a payment provider to charge guests and optionally pay hosts (handle refunds/fees).
+
+Reviews & Ratings — guests leave reviews for properties, host responses, and aggregate rating for listings.
+
+Messaging / Notifications — in-app messaging between host and guest; email/SMS notifications for booking events.
+
+Admin Dashboard — manage users, listings, bookings, reports, and handle disputes.
+
+Each feature should be built incrementally and covered by tests (unit + integration where appropriate).
