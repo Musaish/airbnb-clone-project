@@ -254,3 +254,28 @@ Deploy
 Deploy to staging (via SSH, kubectl, or IaC tools like Terraform). Promote to production after manual approval if desired.
 
 Tools: GitHub Actions, Docker, Docker Compose, Kubernetes/Helm (optional), Terraform (infra), Sentry (monitoring), and a container registry.
+
+**Example minimal workflow file (.github/workflows/ci.yml)**
+name: CI
+on: [push, pull_request]
+jobs:
+test:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Set up Python
+uses: actions/setup-python@v4
+with:
+python-version: '3.11'
+- name: Install dependencies
+run: |
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+- name: Run linters
+run: |
+pip install black flake8
+black --check .
+flake8
+- name: Run tests
+run: |
+pytest --maxfail=1 --disable-warnings -q
