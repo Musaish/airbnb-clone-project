@@ -54,3 +54,31 @@ Security Engineer — reviews architecture for vulnerabilities, configures secre
 UX / Designer — produces wireframes and designs that make the product usable and accessible.
 
 Notes: Each role may overlap and — responsibilities can be assigned to multiple people.
+
+
+
+ **Technology Stack**
+
+For each technology, a short purpose:
+
+Django — web framework to build API endpoints and business logic.
+
+Django REST Framework (DRF) — simplifies building REST APIs in Django.
+
+GraphQL (Graphene-Django) — optional alternative API layer for flexible client queries.
+
+MySQL — relational database to store users, properties, bookings, reviews, and payments.
+
+Redis — in-memory data store for caching and Celery broker.
+
+Celery — background job processing (email sending, cleanup jobs, webhook tasks).
+
+Docker — containerize services for consistent development and deployment.
+
+Nginx — reverse proxy, static files, and TLS termination.
+
+GitHub Actions — CI/CD automation for tests, linting, building images, and deployments.
+
+Stripe / Paystack — payment provider for handling transactions.
+
+Sentry — error monitoring.
