@@ -82,3 +82,95 @@ GitHub Actions — CI/CD automation for tests, linting, building images, and dep
 Stripe / Paystack — payment provider for handling transactions.
 
 Sentry — error monitoring.
+
+
+3. ***Database Design***
+Key entities and important fields
+
+**Users**
+
+id (PK)
+
+email (unique)
+
+password_hash
+
+full_name
+
+is_host (boolean)
+
+created_at
+
+**Properties (Listings)**
+
+id (PK)
+
+owner_id (FK -> Users.id)
+
+title
+
+description
+
+address (could be split: street, city, state, country)
+
+price_per_night
+
+max_guests
+
+created_at
+
+**Bookings**
+
+id (PK)
+
+property_id (FK -> Properties.id)
+
+user_id (FK -> Users.id) — the guest
+
+start_date, end_date
+
+status (enum: pending, confirmed, cancelled, completed)
+
+total_price
+
+**Reviews**
+
+id (PK)
+
+property_id (FK -> Properties.id)
+
+user_id (FK -> Users.id)
+
+rating (1-5)
+
+comment
+
+created_at
+
+**Payments**
+
+id (PK)
+
+booking_id (FK -> Bookings.id)
+
+amount
+
+currency
+
+status (pending, paid, refunded)
+
+provider_payment_id
+
+created_at
+
+Relationships (brief)
+
+A User can own many Properties (1-to-many).
+
+A Property can have many Bookings (1-to-many).
+
+A User can make many Bookings (1-to-many) and leave many Reviews (1-to-many).
+
+A Booking has one Payment (1-to-1 or 1-to-many depending on refunds/partial payments).
+
+Considerations: add indexes on foreign keys, email, and common query fields (e.g., property.city, price range). Use transactions for booking & payment flows to avoid race conditions.
