@@ -227,3 +227,30 @@ Logging & monitoring — record security-relevant events and set up alerting for
 CORS & CSRF protections — configure CORS origin allowlists and enable CSRF protection where required.
 
 Dependency / vulnerability scanning — run tools (e.g., pip-audit, Dependabot) to detect vulnerable packages.
+
+
+***6. CI/CD Pipeline***
+
+What CI/CD is: CI (Continuous Integration) runs checks (linting, tests) on each commit/PR. CD (Continuous Delivery/Deployment) automates building, packaging, and releasing applications.
+
+Why for this project: ensures code quality, catches regressions early, automates deployments to staging/production, and enables fast, reliable releases.
+
+Suggested pipeline stages (GitHub Actions)
+
+on: push / pull_request
+
+Run unit tests, linters (flake8/isort/black), and security scans.
+
+Build stage
+
+Build Docker images and run integration tests in containers.
+
+Publish
+
+Push image to Docker Hub / GitHub Container Registry.
+
+Deploy
+
+Deploy to staging (via SSH, kubectl, or IaC tools like Terraform). Promote to production after manual approval if desired.
+
+Tools: GitHub Actions, Docker, Docker Compose, Kubernetes/Helm (optional), Terraform (infra), Sentry (monitoring), and a container registry.
